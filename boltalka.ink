@@ -152,6 +152,7 @@ endif
 
 === baptism_preparations ===
 # preparations
+#Location: минус_перун
 Приказ дан: идол Перуна свергнуть и сжечь. На площади кипит ярость одних и надежда других. Жрецы проклинают князя. Вас посылают поддерживать порядок.
 
 if: faith_path == "orthodox" and vladimir_trust >= 8
