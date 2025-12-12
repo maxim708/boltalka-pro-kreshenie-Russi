@@ -35,7 +35,7 @@ LIST_religions == ("pagan", "islam", "catholic", "orthodox", "undecided")
     
 *   [Сказать, что сила в мече и старых богах] 
     {people_mood == people_mood+1}
-    {vladimir_trust -= 1}
+    {vladimir_trust -== 1}
     "Сила Руси — в дружине да в Перуне-громовержце!" — бодро отвечаете вы.
     -> pagan_rites
     
