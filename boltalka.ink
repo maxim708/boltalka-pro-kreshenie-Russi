@@ -1,14 +1,14 @@
-VAR faith_path == "undecided"
-VAR vladimir_trust == 5
-VAR people_mood == 0
+VAR faith_path = "undecided"
+VAR vladimir_trust = 5
+VAR people_mood = 0
 VAR beauty_awakened = 0
 
-CONST MAX_TRUST == 10
-CONST MIN_TRUST == 0
+CONST MAX_TRUST = 10
+CONST MIN_TRUST = 0
 
-VAR idols_destroyed == false
-VAR witnessed_byzantium == false
-VAR baptized == false
+VAR idols_destroyed = false
+VAR witnessed_byzantium = false
+VAR baptized = false
 
 LIST_religions == ("pagan", "islam", "catholic", "orthodox", "undecided")
 -> start_game
