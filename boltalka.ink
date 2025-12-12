@@ -87,7 +87,7 @@ endif
 
 *   [Расспросить о красоте богослужения]
     "Красота... Она может тронуть сердце?" — спрашиваете вы.
-    {beauty_awakened += 1}
+    {beauty_awakened == beauty_awakened+1}
     -> after_orthodox_choice
     
 *   [Спросить о власти императора и церкви]
@@ -110,10 +110,10 @@ endif
 
 === embassy_byzantium ===
 Грек говорит с таким жаром, что кажется, будто вы переноситесь в Константинополь. "Представь купол Святой Софии, парящий как небо... голоса ангельского хора... там душа находит покой, которого не даст ни один бог войны."
-{witnessed_byzantium = true}
-faith_path = "orthodox"
-{beauty_awakened = 3}
-{vladimir_trust += 2}
+{witnessed_byzantium == true}
+{faith_path == "orthodox"}
+{beauty_awakened == 3}
+{vladimir_trust == vladimir_trust+2}
 
 Вы стоите, ошеломлённый. Это было... откровение.
 -> vladimir_decision_check
@@ -134,19 +134,19 @@ endif
 "Ты видел и слышал многое, дружинник, — говорит Владимир, глядя на вас пристально. — Я сделал выбор. Русь примет крещение по греческому обряду. Но будет трудно. Старая вера сильна в сердцах. Будешь со мной в этот час?"
 
 *   ["Клянусь служить вам и новой вере всем сердцем!"]
-    {vladimir_trust = MAX_TRUST}
-    faith_path = "orthodox"
+    {vladimir_trust == MAX_TRUST}
+    {faith_path == "orthodox"}
     "Верный пёс," — хмыкает Блуд, но в его глазах уважение.
     -> baptism_preparations
     
 *   ["Мой долг — служить князю. А вера... дело сердца."]
-    {vladimir_trust -= 2}
+    {vladimir_trust == vladimir_trust-2}
     Князь хмурится, но кивает: "Честный ответ. Оставайся при своём долге."
     -> baptism_preparations
     
 *   ["Князь, прости, но я не могу отречься от богов отцов."]
-    {vladimir_trust = MIN_TRUST}
-    faith_path = "pagan"
+    {vladimir_trust == MIN_TRUST}
+    {faith_path == "pagan"}
     Лицо Владимира темнеет. "Вольно. Но с этого дня ты не в моей дружине. Уходи."
     -> outcast_path
 
@@ -155,11 +155,11 @@ endif
 #Location: минус_перун
 Приказ дан: идол Перуна свергнуть и сжечь. На площади кипит ярость одних и надежда других. Жрецы проклинают князя. Вас посылают поддерживать порядок.
 
-if: faith_path == "orthodox" and vladimir_trust >= 8
+{if: faith_path == "orthodox" and vladimir_trust >= 8}
 *   [Взять топор и помочь волочь идола к реке]
     Вы бросаетесь вперёд, чувствуя, как вместе с тяжеленным изваянием в воду уходит целая эпоха.
-    {idols_destroyed = true}
-    {people_mood -= 2}
+    {idols_destroyed == true}
+    {people_mood == people_mood-2}
     -> mass_baptism_dnieper
     
 elseif: faith_path == "pagan" and vladimir_trust > 0
