@@ -10,7 +10,7 @@ VAR idols_destroyed = false
 VAR witnessed_byzantium = false
 VAR baptized = false
 
-LIST_religions = ("pagan", "islam", "catholic", "orthodox", "undecided")
+{LIST_religions = ("pagan", "islam", "catholic", "orthodox", "undecided")}
 -> start_game
 
 === start_game ===
@@ -29,13 +29,13 @@ LIST_religions = ("pagan", "islam", "catholic", "orthodox", "undecided")
 Воевода Блуд, ваш непосредственный начальник, бросает на вас оценивающий взгляд: "Ну, молодой, что скажешь? Уши-то у тебя на месте?"
 
 *   [Предложить искать новую, сильную веру для объединения] 
-    vladimir_trust += 1
+    {vladimir_trust += 1}
     "Может, стоит послушать, какие веры есть у соседей? Чтобы все как один..." — осторожно говорите вы.
     -> pagan_rites
     
 *   [Сказать, что сила в мече и старых богах] 
-    people_mood += 1
-    vladimir_trust -= 1
+    {people_mood += 1}
+    {vladimir_trust -= 1}
     "Сила Руси — в дружине да в Перуне-громовержце!" — бодро отвечаете вы.
     -> pagan_rites
     
@@ -48,13 +48,13 @@ LIST_religions = ("pagan", "islam", "catholic", "orthodox", "undecided")
 #Location: ритес
 По пути из гридницы вы слышите гул толпы. На холме у идола Перуна жрец проводит обряд. Люди молятся, но в их глазах больше страха, чем надежды. Вы слышите шепот: "Боги молчат... жертвы напрасны..."
 
-if: people_mood < 0
+{if: people_mood < 0}
 *   [Участвовать в обряде, чтобы успокоить народ]
     Вы подходите к костру, делая вид, что разделяете общую мольбу. people_mood += 1
     -> envoys_arrive
 endif
 
-if: vladimir_trust > 3
+{if: vladimir_trust > 3}
 *   [Доложить князю о народном недовольстве]
     Вы спешите обратно во дворец. Князь выслушивает ваш доклад кивком. vladimir_trust += 1
     -> envoys_arrive
@@ -87,7 +87,7 @@ endif
 
 *   [Расспросить о красоте богослужения]
     "Красота... Она может тронуть сердце?" — спрашиваете вы.
-    beauty_awakened += 1
+    {beauty_awakened += 1}
     -> after_orthodox_choice
     
 *   [Спросить о власти императора и церкви]
@@ -99,7 +99,7 @@ endif
     -> after_orthodox_choice
 
 === after_orthodox_choice ===
-if: beauty_awakened >= 2 and witnessed_byzantium == false
+{if: beauty_awakened >= 2 and witnessed_byzantium == false}
     Философ кладёт руку вам на плечо. "Юноша, ты готов увидеть. Дай мне рассказать тебе о Царьграде..."
     -> embassy_byzantium
 else
@@ -110,16 +110,16 @@ endif
 
 === embassy_byzantium ===
 Грек говорит с таким жаром, что кажется, будто вы переноситесь в Константинополь. "Представь купол Святой Софии, парящий как небо... голоса ангельского хора... там душа находит покой, которого не даст ни один бог войны."
-witnessed_byzantium = true
+{witnessed_byzantium = true}
 faith_path = "orthodox"
-beauty_awakened = 3
-vladimir_trust += 2
+{beauty_awakened = 3}
+{vladimir_trust += 2}
 
 Вы стоите, ошеломлённый. Это было... откровение.
 -> vladimir_decision_check
 
 === vladimir_decision_check ===
-if: vladimir_trust >= 6
+{if: vladimir_trust >= 6}
     -> vladimir_decision
 else
     // Если доверия недостаточно, игрок не допущен к тайному совету
@@ -134,18 +134,18 @@ endif
 "Ты видел и слышал многое, дружинник, — говорит Владимир, глядя на вас пристально. — Я сделал выбор. Русь примет крещение по греческому обряду. Но будет трудно. Старая вера сильна в сердцах. Будешь со мной в этот час?"
 
 *   ["Клянусь служить вам и новой вере всем сердцем!"]
-    vladimir_trust = MAX_TRUST
+    {vladimir_trust = MAX_TRUST}
     faith_path = "orthodox"
     "Верный пёс," — хмыкает Блуд, но в его глазах уважение.
     -> baptism_preparations
     
 *   ["Мой долг — служить князю. А вера... дело сердца."]
-    vladimir_trust -= 2
+    {vladimir_trust -= 2}
     Князь хмурится, но кивает: "Честный ответ. Оставайся при своём долге."
     -> baptism_preparations
     
 *   ["Князь, прости, но я не могу отречься от богов отцов."]
-    vladimir_trust = MIN_TRUST
+    {vladimir_trust = MIN_TRUST}
     faith_path = "pagan"
     Лицо Владимира темнеет. "Вольно. Но с этого дня ты не в моей дружине. Уходи."
     -> outcast_path
@@ -158,15 +158,15 @@ endif
 if: faith_path == "orthodox" and vladimir_trust >= 8
 *   [Взять топор и помочь волочь идола к реке]
     Вы бросаетесь вперёд, чувствуя, как вместе с тяжеленным изваянием в воду уходит целая эпоха.
-    idols_destroyed = true
-    people_mood -= 2
+    {idols_destroyed = true}
+    {people_mood -= 2}
     -> mass_baptism_dnieper
     
 elseif: faith_path == "pagan" and vladimir_trust > 0
 *   [Встать между толпой и жрецами, пытаясь предотвратить кровопролитие]
     Вы кричите, чтобы люди одумались, но вас едва не сбивают с ног. Вы теряете свой шлем в давке.
-    people_mood += 1
-    vladimir_trust -= 3
+    {people_mood += 1}
+    {vladimir_trust -= 3}
     -> mass_baptism_dnieper
 endif
 
@@ -179,17 +179,17 @@ endif
 #Location: баптисм
 Настал день. Тысячи киевлян на берегу Днепра. Византийские священники в золотых ризах. Князь Владимир стоит впереди всех. Его лицо преображено — в нём решимость и мир. Вода холодная, даже смотря на неё с берега.
 
-if: faith_path == "orthodox" and baptized == false
+{if: faith_path == "orthodox" and baptized == false}
 *   [Войдя в воду, принять крещение]
     Вы снимаете плащ и меч, делаете шаг в ледяную воду... и чувствуете не холод, а странное, новое тепло. baptized = true
     -> good_ending_orthodox
     
-elseif: faith_path == "pagan"
+{elseif: faith_path == "pagan"}
 *   [Остаться на берегу, наблюдая, как уходит старая эпоха]
     Вы стоите на высоком берегу, глядя, как народ сходит в воду. Ветер доносит молитвы на непонятном языке. Вы остаётесь в прошлом.
     -> ending_pagan_outcast
     
-elseif: vladimir_trust >= 7
+{elseif: vladimir_trust >= 7}
 *   [Стоять в оцеплении, охраняя новый обряд, как верный страж]
     Вы держите строй, глядя прямо перед собой. Ваш долг — порядок. Ваша вера — служба.
     -> ending_loyal_guardian
@@ -343,14 +343,14 @@ endif
 После низвержения идолов князь повелевает строить первую церковь на холме. Вас назначают наблюдать за работой. Вы видите, как византийские мастера учат местных плотников новым приёмам. Один из старых дружинников, работая с деревом, бормочет: "Для Перуна рубили иначе... крепче было..."
 
 *   [Прикрикнуть на него: "Новая вера — новые порядки!"] 
-    vladimir_trust += 1
-    people_mood -= 1
+    {vladimir_trust += 1}
+    {people_mood -= 1}
     Работа продолжается в напряжённом молчании.
     -> mass_baptism_dnieper
     
 *   [Подойти и помочь ему, молча взявшись за бревно.]
     Старый воин смотрит на вас с удивлением, затем кивает. Работа спорится.
-    people_mood += 1
+    {people_mood += 1}
     -> mass_baptism_dnieper
     
 *   [Промолчать и пройти мимо.]
