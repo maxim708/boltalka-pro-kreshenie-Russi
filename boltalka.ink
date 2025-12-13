@@ -10,7 +10,7 @@ VAR idols_destroyed = false
 VAR witnessed_byzantium = false
 VAR baptized = false
 
-LIST_religions == ("pagan", "islam", "catholic", "orthodox", "undecided")
+{LIST_religions == ("pagan", "islam", "catholic", "orthodox", "undecided")}
 -> start_game
 
 === start_game ===
@@ -29,7 +29,7 @@ LIST_religions == ("pagan", "islam", "catholic", "orthodox", "undecided")
 Воевода Блуд, ваш непосредственный начальник, бросает на вас оценивающий взгляд: "Ну, молодой, что скажешь? Уши-то у тебя на месте?"
 
 *   [Предложить искать новую, сильную веру для объединения] 
-    vladimir_trust += 1
+    {vladimir_trust += 1}
     "Может, стоит послушать, какие веры есть у соседей? Чтобы все как один..." — осторожно говорите вы.
     -> pagan_rites
     
