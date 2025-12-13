@@ -99,7 +99,7 @@ endif
     -> after_orthodox_choice
 
 === after_orthodox_choice ===
-{if: beauty_awakened >= 2 and witnessed_byzantium == false}
+if {beauty_awakened >= 2 and witnessed_byzantium == false}
     Философ кладёт руку вам на плечо. "Юноша, ты готов увидеть. Дай мне рассказать тебе о Царьграде..."
     -> embassy_byzantium
 else
@@ -119,7 +119,7 @@ endif
 -> vladimir_decision_check
 
 === vladimir_decision_check ===
-{if: vladimir_trust >= 6}
+if {vladimir_trust >= 6}
     -> vladimir_decision
 else
     // Если доверия недостаточно, игрок не допущен к тайному совету
@@ -155,14 +155,14 @@ endif
 #Location: минус_перун
 Приказ дан: идол Перуна свергнуть и сжечь. На площади кипит ярость одних и надежда других. Жрецы проклинают князя. Вас посылают поддерживать порядок.
 
-{if: faith_path == "orthodox" and vladimir_trust >= 8}
+if {faith_path == "orthodox" and vladimir_trust >= 8}
 *   [Взять топор и помочь волочь идола к реке]
     Вы бросаетесь вперёд, чувствуя, как вместе с тяжеленным изваянием в воду уходит целая эпоха.
     {idols_destroyed == true}
     {people_mood == people_mood-2}
     -> mass_baptism_dnieper
     
-elseif: faith_path == "pagan" and vladimir_trust > 0
+elseif {faith_path == "pagan"} and {vladimir_trust > 0}
 *   [Встать между толпой и жрецами, пытаясь предотвратить кровопролитие]
     Вы кричите, чтобы люди одумались, но вас едва не сбивают с ног. Вы теряете свой шлем в давке.
     {people_mood == people_mood+1}
@@ -179,12 +179,12 @@ endif
 #Location: баптисм
 Настал день. Тысячи киевлян на берегу Днепра. Византийские священники в золотых ризах. Князь Владимир стоит впереди всех. Его лицо преображено — в нём решимость и мир. Вода холодная, даже смотря на неё с берега.
 
-{if: faith_path == "orthodox" and baptized == false}
+if {faith_path == "orthodox"} and {baptized == false}
 *   [Войдя в воду, принять крещение]
     Вы снимаете плащ и меч, делаете шаг в ледяную воду... и чувствуете не холод, а странное, новое тепло. baptized = true
     -> good_ending_orthodox
     
-{elseif: faith_path == "pagan"}
+elseif {faith_path == "pagan"}
 *   [Остаться на берегу, наблюдая, как уходит старая эпоха]
     Вы стоите на высоком берегу, глядя, как народ сходит в воду. Ветер доносит молитвы на непонятном языке. Вы остаётесь в прошлом.
     -> ending_pagan_outcast
