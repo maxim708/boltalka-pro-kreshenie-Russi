@@ -50,13 +50,15 @@ VAR baptized = false
 
 + {people_mood < 0}
 *   [Участвовать в обряде, чтобы успокоить народ]
-    Вы подходите к костру, делая вид, что разделяете общую мольбу. ~people_mood = people_mood+1
+    Вы подходите к костру, делая вид, что разделяете общую мольбу. 
+    ~people_mood = people_mood+1
     -> envoys_arrive
 
 
 + {vladimir_trust > 3}
 *   [Доложить князю о народном недовольстве]
-    Вы спешите обратно во дворец. Князь выслушивает ваш доклад кивком. ~vladimir_trust = vladimir_trust+1
+    Вы спешите обратно во дворец. Князь выслушивает ваш доклад кивком. 
+    ~vladimir_trust = vladimir_trust+1
     -> envoys_arrive
 
 
@@ -99,14 +101,14 @@ VAR baptized = false
     -> after_orthodox_choice
 
 === after_orthodox_choice ===
-if {beauty_awakened >= 2 and witnessed_byzantium == false}
++ {beauty_awakened >= 2 and witnessed_byzantium == false}
     Философ кладёт руку вам на плечо. "Юноша, ты готов увидеть. Дай мне рассказать тебе о Царьграде..."
     -> embassy_byzantium
 else
     Вы благодарите философа и отходите, полный новых мыслей.
     faith_path = "orthodox"
     -> vladimir_decision_check
-endif
+
 
 === embassy_byzantium ===
 Грек говорит с таким жаром, что кажется, будто вы переноситесь в Константинополь. "Представь купол Святой Софии, парящий как небо... голоса ангельского хора... там душа находит покой, которого не даст ни один бог войны."
