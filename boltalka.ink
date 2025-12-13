@@ -344,7 +344,7 @@ endif
 
 *   [Прикрикнуть на него: "Новая вера — новые порядки!"] 
     {vladimir_trust == vladimir_trust+1}
-    {people_mood- == people_mood-1}
+    {people_mood == people_mood-1}
     Работа продолжается в напряжённом молчании.
     -> mass_baptism_dnieper
     
