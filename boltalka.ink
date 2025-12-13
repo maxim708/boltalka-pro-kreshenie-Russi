@@ -55,12 +55,13 @@ VAR baptized = false
     -> envoys_arrive
 
 
-+ {vladimir_trust > 3:
+{
+- vladimir_trust > 3:
 *   [Доложить князю о народном недовольстве]
     Вы спешите обратно во дворец. Князь выслушивает ваш доклад кивком. 
     ~vladimir_trust = vladimir_trust+1
     -> envoys_arrive
-    - else:
+- else:
 
 *   [Пройти мимо, не вмешиваясь]
     Вы отворачиваетесь и идёте своей дорогой, оставляя ропот за спиной.
