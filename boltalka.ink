@@ -10,7 +10,7 @@ VAR idols_destroyed = false
 VAR witnessed_byzantium = false
 VAR baptized = false
 
-{LIST_religions == ("pagan", "islam", "catholic", "orthodox", "undecided")}
+VAR LIST_religions = ("pagan", "islam", "catholic", "orthodox", "undecided")
 -> start_game
 
 === start_game ===
