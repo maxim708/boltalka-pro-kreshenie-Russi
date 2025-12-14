@@ -90,7 +90,7 @@ VAR baptized = false
 
 *   [Расспросить о красоте богослужения]
     "Красота... Она может тронуть сердце?" — спрашиваете вы.
-    {beauty_awakened == beauty_awakened+1}
+    ~beauty_awakened = beauty_awakened+1
     -> after_orthodox_choice
     
 *   [Спросить о власти императора и церкви]
@@ -113,22 +113,22 @@ else
 
 === embassy_byzantium ===
 Грек говорит с таким жаром, что кажется, будто вы переноситесь в Константинополь. "Представь купол Святой Софии, парящий как небо... голоса ангельского хора... там душа находит покой, которого не даст ни один бог войны."
-{witnessed_byzantium == true}
-{faith_path == "orthodox"}
-{beauty_awakened == 3}
-{vladimir_trust == vladimir_trust+2}
+~witnessed_byzantium = true
+~faith_path = "orthodox"
+~beauty_awakened = 3
+~vladimir_trust = vladimir_trust+2
 
 Вы стоите, ошеломлённый. Это было... откровение.
 -> vladimir_decision_check
 
 === vladimir_decision_check ===
-if {vladimir_trust >= 6}
+-{vladimir_trust >= 6:
     -> vladimir_decision
-else
+-else:
     // Если доверия недостаточно, игрок не допущен к тайному совету
     Князь принимает решение без вашего участия. Вам лишь приказывают готовиться к большим переменам.
     -> baptism_preparations
-endif
+}
 
 === vladimir_decision ===
 # secret_council
@@ -137,19 +137,19 @@ endif
 "Ты видел и слышал многое, дружинник, — говорит Владимир, глядя на вас пристально. — Я сделал выбор. Русь примет крещение по греческому обряду. Но будет трудно. Старая вера сильна в сердцах. Будешь со мной в этот час?"
 
 *   ["Клянусь служить вам и новой вере всем сердцем!"]
-    {vladimir_trust == MAX_TRUST}
-    {faith_path == "orthodox"}
+    ~vladimir_trust = MAX_TRUST
+    ~faith_path = "orthodox"
     "Верный пёс," — хмыкает Блуд, но в его глазах уважение.
     -> baptism_preparations
     
 *   ["Мой долг — служить князю. А вера... дело сердца."]
-    {vladimir_trust == vladimir_trust-2}
+    ~vladimir_trust = vladimir_trust-2
     Князь хмурится, но кивает: "Честный ответ. Оставайся при своём долге."
     -> baptism_preparations
     
 *   ["Князь, прости, но я не могу отречься от богов отцов."]
-    {vladimir_trust == MIN_TRUST}
-    {faith_path == "pagan"}
+    ~vladimir_trust = MIN_TRUST
+    ~faith_path = "pagan"
     Лицо Владимира темнеет. "Вольно. Но с этого дня ты не в моей дружине. Уходи."
     -> outcast_path
 
@@ -158,20 +158,20 @@ endif
 #Location: минус_перун
 Приказ дан. Идол Перуна свергнуть и сжечь. На площади кипит ярость одних и надежда других. Жрецы проклинают князя. Вас посылают поддерживать порядок.
 
-if {faith_path == "orthodox" and vladimir_trust >= 8}
+-{faith_path == "orthodox" and vladimir_trust >= 8
 *   [Взять топор и помочь волочь идола к реке]
     Вы бросаетесь вперёд, чувствуя, как вместе с тяжеленным изваянием в воду уходит целая эпоха.
-    {idols_destroyed == true}
-    {people_mood == people_mood-2}
+    ~idols_destroyed = true
+    ~people_mood = people_mood-2
     -> mass_baptism_dnieper
-    
-elseif {faith_path == "pagan"} and {vladimir_trust > 0}
+}
+-{faith_path == "pagan" and vladimir_trust > 0
 *   [Встать между толпой и жрецами, пытаясь предотвратить кровопролитие]
     Вы кричите, чтобы люди одумались, но вас едва не сбивают с ног. Вы теряете свой шлем в давке.
-    {people_mood == people_mood+1}
-    {vladimir_trust == vladimir_trust-3}
+    ~people_mood = people_mood+1
+    ~vladimir_trust = vladimir_trust-3
     -> mass_baptism_dnieper
-endif
+}
 
 *   [Наблюдать со стороны, с тяжелым сердцем]
     Вы стоите в стороне, не в силах ни помочь, ни помешать. Сердце сжимается.
@@ -182,17 +182,17 @@ endif
 #Location: баптисм
 Настал день. Тысячи киевлян на берегу Днепра. Византийские священники в золотых ризах. Князь Владимир стоит впереди всех. Его лицо преображено — в нём решимость и мир. Вода холодная, даже смотря на неё с берега.
 
-if {faith_path == "orthodox"} and {baptized == false}
+-{faith_path == "orthodox" and baptized == false}
 *   [Войдя в воду, принять крещение]
-    Вы снимаете плащ и меч, делаете шаг в ледяную воду... и чувствуете не холод, а странное, новое тепло. {baptized == true}
+    Вы снимаете плащ и меч, делаете шаг в ледяную воду... и чувствуете не холод, а странное, новое тепло. ~baptized = true
     -> good_ending_orthodox
     
-elseif {faith_path == "pagan"}
+-{faith_path == "pagan"}
 *   [Остаться на берегу, наблюдая, как уходит старая эпоха]
     Вы стоите на высоком берегу, глядя, как народ сходит в воду. Ветер доносит молитвы на непонятном языке. Вы остаётесь в прошлом.
     -> ending_pagan_outcast
     
-elseif {vladimir_trust >= 7}
+-{vladimir_trust >= 7}
 *   [Стоять в оцеплении, охраняя новый обряд, как верный страж]
     Вы держите строй, глядя прямо перед собой. Ваш долг — порядок. Ваша вера — служба.
     -> ending_loyal_guardian
