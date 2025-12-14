@@ -103,10 +103,10 @@ VAR baptized = false
 
 === after_orthodox_choice ===
 {
-- beauty_awakened >= 2 and witnessed_byzantium == false
+- beauty_awakened >= 2 and witnessed_byzantium == false:
     Философ кладёт руку вам на плечо. "Юноша, ты готов увидеть. Дай мне рассказать тебе о Царьграде..."
     -> embassy_byzantium
-- else
+- else:
     Вы благодарите философа и отходите, полный новых мыслей.
     faith_path = "orthodox"
     -> vladimir_decision_check
