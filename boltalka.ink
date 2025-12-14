@@ -109,7 +109,7 @@ VAR baptized = false
     -> embassy_byzantium
 - else:
     Вы благодарите философа и отходите, полный новых мыслей.
-    faith_path = "orthodox"
+    ~faith_path = "orthodox"
     -> vladimir_decision_check
 }
 
